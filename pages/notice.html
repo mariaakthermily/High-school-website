@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>নোটিশ বোর্ড | শহীদ স্মরণী উচ্চ বিদ্যালয়</title>
+  <link rel="stylesheet" href="../css/style.css" />
+  <link rel="stylesheet" href="../css/animations.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <style>
+    .notice-filter-bar { display:flex; gap:10px; flex-wrap:wrap; margin-bottom:28px; align-items:center; }
+    .filter-btn { padding:7px 18px; border-radius:20px; border:2px solid var(--mid-gray); font-size:0.85rem; font-weight:600; cursor:pointer; transition:all 0.2s; color:var(--text-mid); background:white; }
+    .filter-btn.active { background:var(--navy); color:white; border-color:var(--navy); }
+    .filter-btn:hover { border-color:var(--navy); color:var(--navy); }
+    .notice-grid { display:flex; flex-direction:column; gap:16px; }
+    .notice-item-full { background:white; border-radius:14px; padding:24px; box-shadow:var(--shadow-sm); border:1px solid var(--mid-gray); border-left:4px solid var(--navy); transition:all 0.3s; cursor:pointer; }
+    .notice-item-full:hover { box-shadow:var(--shadow-md); transform:translateX(4px); }
+    .notice-item-full.important { border-left-color:var(--red); }
+    .notice-item-full.admission { border-left-color:var(--green); }
+    .notice-header { display:flex; justify-content:space-between; align-items:flex-start; flex-wrap:wrap; gap:8px; margin-bottom:10px; }
+    .notice-item-full h4 { font-size:1rem; font-weight:700; color:var(--text-dark); }
+    .notice-meta { display:flex; gap:12px; align-items:center; flex-wrap:wrap; font-size:0.78rem; color:var(--text-light); margin-top:8px; }
+    .notice-meta i { color:var(--navy); }
+    .notice-item-full p.excerpt { font-size:0.875rem; color:var(--text-mid); margin-top:8px; line-height:1.7; }
+    .search-bar { display:flex; gap:12px; margin-bottom:24px; }
+    .search-bar input { flex:1; padding:11px 16px; border:1.5px solid var(--mid-gray); border-radius:8px; font-size:0.9rem; font-family:var(--font-bn); }
+    .search-bar input:focus { outline:none; border-color:var(--navy); }
+  </style>
+</head>
+<body>
+<div class="top-bar"><div class="container"><div class="top-bar-left"><span><i class="fas fa-phone"></i> +880 1700-000000</span></div><div class="top-bar-right"><a href="admission-form.html" class="top-link highlight"><i class="fas fa-user-plus"></i> ভর্তি ২০২৬</a><a href="login.html" class="top-link"><i class="fas fa-sign-in-alt"></i> লগইন</a></div></div></div>
+<header class="header" id="header"><div class="container"><div class="header-inner"><div class="logo-area"><div class="logo-icon">🏫</div><div class="logo-text"><h1 class="school-name-bn">শহীদ স্মরণী উচ্চ বিদ্যালয়</h1><p class="school-name-en">Shahid Smarani High School</p></div></div><a href="../index.html" class="btn btn-primary-outline btn-sm"><i class="fas fa-home"></i> হোম</a></div></div></header>
+
+<div class="page-header"><div class="container"><div class="page-header-content"><h1><i class="fas fa-bell"></i> নোটিশ বোর্ড</h1><div class="breadcrumb"><a href="../index.html">হোম</a><span>/</span><span>নোটিশ বোর্ড</span></div></div></div></div>
+
+<section class="section-padding">
+  <div class="container">
+    <div style="display:grid;grid-template-columns:1fr 300px;gap:30px;align-items:flex-start;">
+      <div>
+        <!-- SEARCH -->
+        <div class="search-bar">
+          <input type="text" id="noticeSearch" placeholder="🔍 নোটিশ খুঁজুন..." />
+        </div>
+
+        <!-- FILTER -->
+        <div class="notice-filter-bar">
+          <span style="font-size:0.85rem;font-weight:600;color:var(--text-light);">ফিল্টার:</span>
+          <button class="filter-btn active" data-category="all">সব</button>
+          <button class="filter-btn" data-category="ভর্তি">ভর্তি</button>
+          <button class="filter-btn" data-category="পরীক্ষা">পরীক্ষা</button>
+          <button class="filter-btn" data-category="বেতন">বেতন</button>
+          <button class="filter-btn" data-category="ক্রীড়া">ক্রীড়া</button>
+          <button class="filter-btn" data-category="সাধারণ">সাধারণ</button>
+        </div>
+
+        <!-- NOTICES LIST -->
+        <div class="notice-grid" id="noticeContainer">
+          <div class="empty-state"><div class="empty-state-icon"><i class="fas fa-spinner fa-spin"></i></div><p>নোটিশ লোড হচ্ছে...</p></div>
+        </div>
+
+        <div class="pagination" id="pagination"></div>
+      </div>
+
+      <!-- SIDEBAR -->
+      <div>
+        <div class="card" style="margin-bottom:20px;">
+          <div class="card-header"><h4 style="color:var(--navy);font-size:0.95rem;font-weight:700;"><i class="fas fa-star"></i> জরুরি নোটিশ</h4></div>
+          <div class="card-body" id="urgentNotices">
+            <div class="notice-item" style="padding:10px 0;">
+              <div class="notice-date" style="background:rgba(139,26,26,0.1);"><span class="day" style="color:var(--red);">২৩</span><span class="month">অক্টো</span></div>
+              <div class="notice-content"><h4 style="font-size:0.875rem;"><a href="#">ভর্তির বিজ্ঞপ্তি ২০২৬</a></h4></div>
+            </div>
+            <div class="notice-item" style="padding:10px 0;">
+              <div class="notice-date" style="background:rgba(139,26,26,0.1);"><span class="day" style="color:var(--red);">১৮</span><span class="month">অক্টো</span></div>
+              <div class="notice-content"><h4 style="font-size:0.875rem;"><a href="#">অভিভাবক সমাবেশ ২৫ অক্টো</a></h4></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header"><h4 style="color:var(--navy);font-size:0.95rem;font-weight:700;"><i class="fas fa-calendar"></i> আসন্ন অনুষ্ঠান</h4></div>
+          <div class="card-body">
+            <div class="event-card" style="margin-bottom:10px;">
+              <div class="event-date-box" style="background:var(--navy);width:48px;height:48px;flex-shrink:0;"><span class="event-day" style="font-size:1.1rem;">২৫</span><span class="event-month">অক্টো</span></div>
+              <div class="event-info"><h4 style="font-size:0.85rem;">অভিভাবক সমাবেশ</h4><p><i class="fas fa-clock"></i> সকাল ১০:০০</p></div>
+            </div>
+            <div class="event-card">
+              <div class="event-date-box" style="background:var(--green);width:48px;height:48px;flex-shrink:0;"><span class="event-day" style="font-size:1.1rem;">০৫</span><span class="event-month">নভে</span></div>
+              <div class="event-info"><h4 style="font-size:0.85rem;">বার্ষিক ক্রীড়া</h4><p><i class="fas fa-clock"></i> সকাল ৯:০০</p></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="footer"><div class="footer-bottom"><div class="container"><p>© ২০২৫ শহীদ স্মরণী উচ্চ বিদ্যালয়</p><div class="footer-bottom-links"><a href="../index.html">হোম</a><a href="contact.html">যোগাযোগ</a></div></div></div></footer>
+<button class="back-to-top" id="backToTop" onclick="scrollToTop()"><i class="fas fa-chevron-up"></i></button>
+<script src="../js/main.js"></script>
+<script>
+const catColors = { ভর্তি: 'var(--green)', পরীক্ষা: 'var(--navy)', বেতন: 'var(--gold)', ক্রীড়া: 'var(--purple)', সাধারণ: 'var(--dark-gray)', জরুরি: 'var(--red)' };
+
+function renderNotices(filter = 'all', search = '') {
+  const notices = DB.get('notices').filter(n => n.published);
+  const filtered = notices.filter(n => {
+    const matchCat = filter === 'all' || n.category === filter;
+    const matchSearch = !search || n.title.includes(search) || (n.content && n.content.includes(search));
+    return matchCat && matchSearch;
+  });
+  const container = document.getElementById('noticeContainer');
+  if (!filtered.length) {
+    container.innerHTML = `<div class="empty-state"><div class="empty-state-icon"><i class="fas fa-bell-slash"></i></div><h3>কোনো নোটিশ নেই</h3><p>এই বিভাগে কোনো নোটিশ পাওয়া যায়নি।</p></div>`;
+    return;
+  }
+  container.innerHTML = filtered.map(n => `
+    <div class="notice-item-full ${n.important ? 'important' : ''} ${n.category === 'ভর্তি' ? 'admission' : ''}" data-category="${n.category}" onclick="window.location.href='notice-detail.html?id=${n.id}'">
+      <div class="notice-header">
+        <h4>${n.title}</h4>
+        <div style="display:flex;gap:6px;flex-wrap:wrap;">
+          ${n.important ? '<span class="badge badge-danger"><i class="fas fa-exclamation"></i> জরুরি</span>' : ''}
+          <span class="badge badge-info">${n.category}</span>
+        </div>
+      </div>
+      <p class="excerpt">${n.content ? n.content.substring(0, 180) + (n.content.length > 180 ? '...' : '') : ''}</p>
+      <div class="notice-meta">
+        <span><i class="fas fa-calendar"></i> ${n.date}</span>
+        <span style="margin-left:auto;color:var(--navy);font-weight:600;">বিস্তারিত দেখুন →</span>
+      </div>
+    </div>
+  `).join('');
+}
+
+// Filter buttons
+document.querySelectorAll('.filter-btn').forEach(btn => {
+  btn.addEventListener('click', function() {
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    this.classList.add('active');
+    renderNotices(this.dataset.category, document.getElementById('noticeSearch').value);
+  });
+});
+
+// Search
+document.getElementById('noticeSearch').addEventListener('input', function() {
+  const activeFilter = document.querySelector('.filter-btn.active')?.dataset.category || 'all';
+  renderNotices(activeFilter, this.value);
+});
+
+document.addEventListener('DOMContentLoaded', () => renderNotices());
+</script>
+</body>
+</html>

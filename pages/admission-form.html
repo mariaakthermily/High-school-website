@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>অনলাইন ভর্তির আবেদন | শহীদ স্মরণী উচ্চ বিদ্যালয়</title>
+  <meta name="description" content="শহীদ স্মরণী উচ্চ বিদ্যালয়ে অনলাইনে ভর্তির আবেদন করুন। সহজ ও নিরাপদ প্রক্রিয়া।" />
+  <link rel="stylesheet" href="../css/style.css" />
+  <link rel="stylesheet" href="../css/animations.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@300;400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <style>
+    .steps-bar { display: flex; gap: 0; margin-bottom: 36px; }
+    .step { flex: 1; display: flex; flex-direction: column; align-items: center; position: relative; }
+    .step::after { content: ''; position: absolute; top: 20px; left: 50%; width: 100%; height: 2px; background: var(--mid-gray); z-index: 0; }
+    .step:last-child::after { display: none; }
+    .step-circle { width: 40px; height: 40px; border-radius: 50%; background: var(--mid-gray); color: white; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 0.875rem; z-index: 1; position: relative; transition: all 0.3s; }
+    .step.active .step-circle { background: var(--navy); }
+    .step.completed .step-circle { background: var(--green); }
+    .step.completed::after { background: var(--green); }
+    .step-label { font-size: 0.75rem; color: var(--text-light); margin-top: 6px; text-align: center; font-weight: 500; }
+    .step.active .step-label { color: var(--navy); font-weight: 700; }
+    .form-step { display: none; }
+    .form-step.active { display: block; animation: fadeIn 0.4s ease; }
+    .confirmation-box { text-align: center; padding: 40px 30px; }
+    .app-number { font-size: 2rem; font-weight: 800; color: var(--navy); background: rgba(10,36,99,0.07); padding: 16px 32px; border-radius: 12px; display: inline-block; margin: 16px 0; letter-spacing: 2px; }
+    .file-upload-area { border: 2px dashed var(--mid-gray); border-radius: 10px; padding: 30px; text-align: center; cursor: pointer; transition: all 0.3s; }
+    .file-upload-area:hover { border-color: var(--navy); background: rgba(10,36,99,0.03); }
+    .file-upload-area i { font-size: 2rem; color: var(--gray); margin-bottom: 8px; }
+    .file-upload-area p { font-size: 0.85rem; color: var(--text-light); }
+    .sidebar-info { background: linear-gradient(180deg, rgba(10,36,99,0.06) 0%, rgba(15,82,50,0.06) 100%); border-radius: 16px; padding: 24px; border: 1px solid var(--mid-gray); }
+    .sidebar-info h4 { color: var(--navy); font-size: 1rem; font-weight: 700; margin-bottom: 16px; }
+    .info-item { display: flex; gap: 10px; margin-bottom: 12px; font-size: 0.875rem; }
+    .info-item i { color: var(--green); margin-top: 3px; flex-shrink: 0; }
+  </style>
+</head>
+<body>
+
+<!-- TOP BAR -->
+<div class="top-bar">
+  <div class="container">
+    <div class="top-bar-left">
+      <span><i class="fas fa-phone"></i> +880 1700-000000</span>
+      <span><i class="fas fa-envelope"></i> info@sshs.edu.bd</span>
+    </div>
+    <div class="top-bar-right">
+      <a href="notice.html" class="top-link"><i class="fas fa-bell"></i> নোটিশ</a>
+      <a href="login.html" class="top-link"><i class="fas fa-sign-in-alt"></i> লগইন</a>
+    </div>
+  </div>
+</div>
+
+<!-- HEADER -->
+<header class="header" id="header">
+  <div class="container">
+    <div class="header-inner">
+      <div class="logo-area">
+        <div class="logo-icon">🏫</div>
+        <div class="logo-text">
+          <h1 class="school-name-bn">শহীদ স্মরণী উচ্চ বিদ্যালয়</h1>
+          <p class="school-name-en">Shahid Smarani High School</p>
+        </div>
+      </div>
+      <nav>
+        <a href="../index.html" class="btn btn-primary-outline btn-sm"><i class="fas fa-home"></i> হোম</a>
+      </nav>
+    </div>
+  </div>
+</header>
+
+<!-- PAGE HEADER -->
+<div class="page-header">
+  <div class="container">
+    <div class="page-header-content">
+      <h1>অনলাইন ভর্তির আবেদন</h1>
+      <div class="breadcrumb">
+        <a href="../index.html">হোম</a>
+        <span>/</span>
+        <a href="admission.html">ভর্তি</a>
+        <span>/</span>
+        <span>আবেদন ফরম</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ADMISSION FORM -->
+<section class="section-padding">
+  <div class="container">
+    <div style="display:grid;grid-template-columns:1fr 320px;gap:30px;align-items:flex-start;">
+      <div>
+        <!-- STEPS -->
+        <div class="steps-bar" id="stepsBar">
+          <div class="step active" id="step1-indicator"><div class="step-circle">১</div><div class="step-label">ব্যক্তিগত তথ্য</div></div>
+          <div class="step" id="step2-indicator"><div class="step-circle">২</div><div class="step-label">শিক্ষা তথ্য</div></div>
+          <div class="step" id="step3-indicator"><div class="step-circle">৩</div><div class="step-label">অভিভাবক তথ্য</div></div>
+          <div class="step" id="step4-indicator"><div class="step-circle">৪</div><div class="step-label">নিশ্চিতকরণ</div></div>
+        </div>
+
+        <div class="card" id="formContainer">
+          <div class="card-body" style="padding:32px;">
+            <form id="admissionForm" novalidate>
+
+              <!-- STEP 1 -->
+              <div class="form-step active" id="formStep1">
+                <h3 style="color:var(--navy);margin-bottom:24px;"><i class="fas fa-user"></i> আবেদনকারীর ব্যক্তিগত তথ্য</h3>
+                <div class="form-grid-2">
+                  <div class="form-group">
+                    <label class="form-label">নাম (বাংলায়) <span class="required">*</span></label>
+                    <input type="text" name="applicantName" class="form-control" placeholder="বাংলায় নাম লিখুন" data-label="আবেদনকারীর নাম" />
+                    <span class="form-error" data-for="applicantName"></span>
+                  </div>
+                  <div class="form-group">
+                    <label class="form-label">নাম (ইংরেজিতে) <span class="required">*</span></label>
+                    <input type="text" name="nameEn" class="form-control" placeholder="Name in English" />
+                    <span class="form-error" data-for="nameEn"></span>
+                  </div>
+                  <div class="form-group">
+                    <label class="form-label">জন্ম তারিখ <span class="required">*</span></label>
+                    <input type="date" name="dob" class="form-control" data-label="জন্ম তারিখ" />
+                    <span class="form-error" data-for="dob"></span>
+                  </div>
+                  <div class="form-group">
+                    <label class="form-label">লিঙ্গ <span class="required">*</span></label>
+                    <select name="gender" class="form-control">
+                      <option value="">নির্বাচন করুন</option>
+                      <option>পুরুষ</option>
+                      <option>মহিলা</option>
+                      <option>অন্যান্য</option>
+                    </select>
+                  </div>
+                  <div class="form-group">
+                    <label class="form-label">ধর্ম</label>
+                    <select name="religion" class="form-control">
+                      <option>ইসলাম</option>
+                      <option>হিন্দু</option>
+                      <option>বৌদ্ধ</option>
+                      <option>খ্রিস্টান</option>
+                      <option>অন্যান্য</option>
+                    </select>
+                  </div>
+                  <div class="form-group">
+                    <label class="form-label">জাতীয়তা</label>
+                    <input type="text" class="form-control" value="বাংলাদেশী" />
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="form-label">স্থায়ী ঠিকানা</label>
+                  <textarea name="address" class="form-control" rows="2" placeholder="সম্পূর্ণ ঠিকানা লিখুন"></textarea>
+                </div>
+                <div style="display:flex;justify-content:flex-end;margin-top:20px;">
+                  <button type="button" class="btn btn-primary" onclick="nextStep(1)">পরবর্তী <i class="fas fa-arrow-right"></i></button>
+                </div>
+              </div>
+
+              <!-- STEP 2 -->
+              <div class="form-step" id="formStep2">
+                <h3 style="color:var(--navy);margin-bottom:24px;"><i class="fas fa-graduation-cap"></i> শিক্ষাগত তথ্য</h3>
+                <div class="form-grid-2">
+                  <div class="form-group">
+                    <label class="form-label">কাঙ্ক্ষিত শ্রেণি <span class="required">*</span></label>
+                    <select name="class" class="form-control" data-label="কাঙ্ক্ষিত শ্রেণি">
+                      <option value="">নির্বাচন করুন</option>
+                      <option>৬ষ্ঠ শ্রেণি</option>
+                      <option>৭ম শ্রেণি</option>
+                      <option>৮ম শ্রেণি</option>
+                      <option>৯ম শ্রেণি</option>
+                      <option>১০ম শ্রেণি</option>
+                    </select>
+                    <span class="form-error" data-for="class"></span>
+                  </div>
+                  <div class="form-group">
+                    <label class="form-label">শিক্ষাবর্ষ</label>
+                    <select class="form-control">
+                      <option>২০২৬</option>
+                      <option>২০২৫</option>
+                    </select>
+                  </div>
+                  <div class="form-group">
+                    <label class="form-label">পূর্ববর্তী বিদ্যালয়ের নাম</label>
+                    <input type="text" name="prevSchool" class="form-control" placeholder="আগের স্কুলের নাম" />
+                  </div>
+                  <div class="form-group">
+                    <label class="form-label">পূর্ববর্তী শ্রেণি</label>
+                    <select class="form-control">
+                      <option>৫ম শ্রেণি</option>
+                      <option>৬ষ্ঠ শ্রেণি</option>
+                      <option>৭ম শ্রেণি</option>
+                      <option>৮ম শ্রেণি</option>
+                      <option>৯ম শ্রেণি</option>
+                    </select>
+                  </div>
+                  <div class="form-group">
+                    <label class="form-label">পঞ্চম শ্রেণির ফলাফল / জেএসএফ</label>
+                    <input type="text" class="form-control" placeholder="যেমন: A+, GPA 5.00" />
+                  </div>
+                  <div class="form-group">
+                    <label class="form-label">পাসের সাল</label>
+                    <input type="number" class="form-control" placeholder="যেমন: ২০২৫" />
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="form-label">ছবি আপলোড (JPG, PNG - সর্বোচ্চ ২MB)</label>
+                  <div class="file-upload-area" onclick="document.getElementById('photoUpload').click()">
+                    <i class="fas fa-camera"></i>
+                    <p>ছবি আপলোড করতে ক্লিক করুন<br><small>JPG, PNG ফরম্যাট, সর্বোচ্চ ২MB</small></p>
+                    <input type="file" id="photoUpload" accept="image/jpeg,image/png" style="display:none;" onchange="handleFileUpload(this,'photoPreview')" />
+                  </div>
+                  <div id="photoPreview" style="margin-top:10px;"></div>
+                </div>
+                <div style="display:flex;justify-content:space-between;margin-top:20px;">
+                  <button type="button" class="btn btn-primary-outline" onclick="prevStep(2)"><i class="fas fa-arrow-left"></i> পূর্ববর্তী</button>
+                  <button type="button" class="btn btn-primary" onclick="nextStep(2)">পরবর্তী <i class="fas fa-arrow-right"></i></button>
+                </div>
+              </div>
+
+              <!-- STEP 3 -->
+              <div class="form-step" id="formStep3">
+                <h3 style="color:var(--navy);margin-bottom:24px;"><i class="fas fa-users"></i> অভিভাবকের তথ্য</h3>
+                <div class="form-grid-2">
+                  <div class="form-group">
+                    <label class="form-label">পিতার নাম <span class="required">*</span></label>
+                    <input type="text" name="guardianName" class="form-control" placeholder="পিতার নাম" data-label="অভিভাবকের নাম" />
+                    <span class="form-error" data-for="guardianName"></span>
+                  </div>
+                  <div class="form-group">
+                    <label class="form-label">মাতার নাম</label>
+                    <input type="text" class="form-control" placeholder="মাতার নাম" />
+                  </div>
+                  <div class="form-group">
+                    <label class="form-label">পিতার পেশা</label>
+                    <input type="text" class="form-control" placeholder="পেশা" />
+                  </div>
+                  <div class="form-group">
+                    <label class="form-label">মোবাইল নম্বর <span class="required">*</span></label>
+                    <input type="tel" name="phone" class="form-control" placeholder="০১xxxxxxxxxx" data-label="ফোন নম্বর" />
+                    <span class="form-error" data-for="phone"></span>
+                  </div>
+                  <div class="form-group">
+                    <label class="form-label">ইমেইল ঠিকানা</label>
+                    <input type="email" class="form-control" placeholder="ইমেইল ঠিকানা (ঐচ্ছিক)" />
+                  </div>
+                  <div class="form-group">
+                    <label class="form-label">জাতীয় পরিচয়পত্র নম্বর</label>
+                    <input type="text" class="form-control" placeholder="NID নম্বর" />
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="form-label" style="display:flex;align-items:center;gap:8px;cursor:pointer;">
+                    <input type="checkbox" id="termsCheck" />
+                    <span>আমি নিশ্চিত করছি যে উপরের সকল তথ্য সঠিক এবং সত্য। <a href="terms.html" style="color:var(--navy);">শর্তাবলী</a> পড়েছি এবং মেনে নিয়েছি।</span>
+                  </label>
+                </div>
+                <div style="display:flex;justify-content:space-between;margin-top:20px;">
+                  <button type="button" class="btn btn-primary-outline" onclick="prevStep(3)"><i class="fas fa-arrow-left"></i> পূর্ববর্তী</button>
+                  <button type="submit" class="btn btn-success btn-lg"><i class="fas fa-paper-plane"></i> আবেদন জমা দিন</button>
+                </div>
+              </div>
+
+            </form>
+
+            <!-- CONFIRMATION -->
+            <div id="confirmationBox" style="display:none;" class="confirmation-box">
+              <div style="font-size:4rem;margin-bottom:16px;">✅</div>
+              <h2 style="color:var(--green);font-size:1.5rem;font-weight:800;">আবেদন সফলভাবে জমা হয়েছে!</h2>
+              <p style="color:var(--text-mid);margin:12px 0;">আপনার আবেদন নম্বর:</p>
+              <div class="app-number" id="generatedAppNo">APP-2026-0001</div>
+              <p style="color:var(--text-light);font-size:0.875rem;margin:16px 0;">এই নম্বরটি সংরক্ষণ করুন। আবেদনের অবস্থা জানতে এটি প্রয়োজন হবে।</p>
+              <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:24px;">
+                <a href="admission-status.html" class="btn btn-primary"><i class="fas fa-search"></i> আবেদনের অবস্থা দেখুন</a>
+                <button onclick="window.print()" class="btn btn-primary-outline"><i class="fas fa-print"></i> প্রিন্ট করুন</button>
+                <a href="../index.html" class="btn btn-primary-outline"><i class="fas fa-home"></i> হোমে ফিরুন</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SIDEBAR INFO -->
+      <div>
+        <div class="sidebar-info">
+          <h4><i class="fas fa-info-circle"></i> ভর্তির তথ্য</h4>
+          <div class="info-item"><i class="fas fa-calendar-check"></i><div><strong>আবেদনের সময়কাল</strong><br/>১ নভেম্বর - ৩০ নভেম্বর ২০২৫</div></div>
+          <div class="info-item"><i class="fas fa-school"></i><div><strong>উপলব্ধ শ্রেণি</strong><br/>৬ষ্ঠ থেকে ১০ম শ্রেণি</div></div>
+          <div class="info-item"><i class="fas fa-chair"></i><div><strong>মোট আসন</strong><br/>প্রতি শ্রেণিতে ৬০টি আসন</div></div>
+          <div class="info-item"><i class="fas fa-file-alt"></i><div><strong>পরীক্ষার তারিখ</strong><br/>১০ ডিসেম্বর ২০২৫</div></div>
+          <div class="info-item"><i class="fas fa-money-bill"></i><div><strong>ভর্তি ফি</strong><br/>৳ ৫,০০০ (অনুমোদনের পর)</div></div>
+          <hr style="margin:16px 0;border-color:var(--mid-gray);" />
+          <h4><i class="fas fa-paperclip"></i> প্রয়োজনীয় কাগজপত্র</h4>
+          <ul style="display:flex;flex-direction:column;gap:8px;font-size:0.85rem;">
+            <li><i class="fas fa-check" style="color:var(--green);margin-right:6px;"></i>পূর্ববর্তী ফলাফলের কপি</li>
+            <li><i class="fas fa-check" style="color:var(--green);margin-right:6px;"></i>জন্ম নিবন্ধনের কপি</li>
+            <li><i class="fas fa-check" style="color:var(--green);margin-right:6px;"></i>পাসপোর্ট সাইজের ছবি</li>
+            <li><i class="fas fa-check" style="color:var(--green);margin-right:6px;"></i>অভিভাবকের NID এর কপি</li>
+            <li><i class="fas fa-check" style="color:var(--green);margin-right:6px;"></i>TC (Transfer Certificate)</li>
+          </ul>
+        </div>
+        <div style="margin-top:16px;">
+          <a href="admission-status.html" class="btn btn-primary" style="width:100%;justify-content:center;margin-bottom:10px;"><i class="fas fa-search"></i> আবেদনের অবস্থা দেখুন</a>
+          <a href="admission.html" class="btn btn-primary-outline" style="width:100%;justify-content:center;"><i class="fas fa-info-circle"></i> ভর্তি সংক্রান্ত তথ্য</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer-bottom">
+    <div class="container">
+      <p>© ২০২৫ শহীদ স্মরণী উচ্চ বিদ্যালয়। সর্বস্বত্ব সংরক্ষিত।</p>
+      <div class="footer-bottom-links"><a href="privacy.html">গোপনীয়তা নীতি</a><a href="terms.html">শর্তাবলী</a></div>
+    </div>
+  </div>
+</footer>
+
+<script src="../js/main.js"></script>
+<script>
+let currentStep = 1;
+const totalSteps = 3;
+
+function nextStep(step) {
+  if (step === 1) {
+    const nameInput = document.querySelector('[name="applicantName"]');
+    if (!nameInput.value.trim()) { nameInput.classList.add('error'); document.querySelector('[data-for="applicantName"]').textContent = 'আবেদনকারীর নাম প্রয়োজন।'; return; }
+    nameInput.classList.remove('error'); document.querySelector('[data-for="applicantName"]').textContent = '';
+  }
+  if (step === 2) {
+    const cls = document.querySelector('[name="class"]');
+    if (!cls.value) { cls.classList.add('error'); document.querySelector('[data-for="class"]').textContent = 'কাঙ্ক্ষিত শ্রেণি নির্বাচন করুন।'; return; }
+    cls.classList.remove('error'); document.querySelector('[data-for="class"]').textContent = '';
+  }
+  document.getElementById('formStep' + step).classList.remove('active');
+  document.getElementById('step' + step + '-indicator').classList.remove('active');
+  document.getElementById('step' + step + '-indicator').classList.add('completed');
+  currentStep = step + 1;
+  document.getElementById('formStep' + currentStep).classList.add('active');
+  document.getElementById('step' + currentStep + '-indicator').classList.add('active');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function prevStep(step) {
+  document.getElementById('formStep' + step).classList.remove('active');
+  document.getElementById('step' + step + '-indicator').classList.remove('active');
+  currentStep = step - 1;
+  document.getElementById('formStep' + currentStep).classList.add('active');
+  document.getElementById('step' + (step-1) + '-indicator').classList.remove('completed');
+  document.getElementById('step' + (step-1) + '-indicator').classList.add('active');
+}
+
+function handleFileUpload(input, previewId) {
+  const file = input.files[0];
+  if (!file) return;
+  if (file.size > 2 * 1024 * 1024) { showToast('ফাইলের আকার ২MB-এর বেশি।', 'error'); return; }
+  const reader = new FileReader();
+  reader.onload = (e) => {
+    document.getElementById(previewId).innerHTML = `<div style="display:flex;align-items:center;gap:10px;padding:10px;background:var(--light-gray);border-radius:8px;"><img src="${e.target.result}" style="width:60px;height:60px;object-fit:cover;border-radius:8px;" /><div><strong>${file.name}</strong><br/><small>${(file.size/1024).toFixed(0)} KB</small></div><button type="button" onclick="this.parentElement.parentElement.innerHTML=''" style="margin-left:auto;color:var(--red);"><i class="fas fa-times"></i></button></div>`;
+  };
+  reader.readAsDataURL(file);
+}
+
+// Update admission form to check terms
+document.getElementById('admissionForm').addEventListener('submit', function(e) {
+  e.preventDefault();
+  if (!document.getElementById('termsCheck').checked) {
+    showToast('অনুগ্রহ করে শর্তাবলী মেনে নিন।', 'warning');
+    return;
+  }
+  const guardian = document.querySelector('[name="guardianName"]');
+  const phone = document.querySelector('[name="phone"]');
+  if (!guardian.value.trim()) { guardian.classList.add('error'); document.querySelector('[data-for="guardianName"]').textContent = 'অভিভাবকের নাম প্রয়োজন।'; return; }
+  if (!phone.value.trim() || phone.value.replace(/\D/g,'').length < 11) { phone.classList.add('error'); document.querySelector('[data-for="phone"]').textContent = 'সঠিক ফোন নম্বর দিন।'; return; }
+
+  const appNo = 'APP-' + new Date().getFullYear() + '-' + String(DB.nextId('admissions')).padStart(4, '0');
+  DB.add('admissions', {
+    id: DB.nextId('admissions'),
+    appNo,
+    name: document.querySelector('[name="applicantName"]').value,
+    class: document.querySelector('[name="class"]').value,
+    dob: document.querySelector('[name="dob"]').value,
+    guardian: guardian.value,
+    phone: phone.value,
+    status: 'pending',
+    date: new Date().toISOString().slice(0,10)
+  });
+
+  // Show step 4 complete
+  document.getElementById('formStep3').classList.remove('active');
+  document.getElementById('step3-indicator').classList.remove('active');
+  document.getElementById('step3-indicator').classList.add('completed');
+  document.getElementById('step4-indicator').classList.add('completed');
+  document.getElementById('formContainer').innerHTML = `
+    <div class="card-body" style="padding:40px;text-align:center;">
+      <div style="font-size:5rem;margin-bottom:20px;">✅</div>
+      <h2 style="color:var(--green);font-size:1.8rem;font-weight:800;margin-bottom:12px;">আবেদন সফলভাবে জমা হয়েছে!</h2>
+      <p style="color:var(--text-mid);margin-bottom:8px;">আপনার আবেদন নম্বর:</p>
+      <div class="app-number">${appNo}</div>
+      <p style="color:var(--text-light);font-size:0.875rem;margin:16px 0;max-width:400px;margin:16px auto;">এই নম্বরটি সংরক্ষণ করুন। ভর্তি পরীক্ষার আগে SMS/ইমেইলে যোগাযোগ করা হবে।</p>
+      <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:28px;">
+        <a href="admission-status.html" class="btn btn-primary"><i class="fas fa-search"></i> আবেদনের অবস্থা দেখুন</a>
+        <button onclick="window.print()" class="btn btn-primary-outline"><i class="fas fa-print"></i> প্রিন্ট করুন</button>
+        <a href="../index.html" class="btn btn-primary-outline"><i class="fas fa-home"></i> হোমে ফিরুন</a>
+      </div>
+    </div>
+  `;
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+  showToast('আবেদন সফলভাবে জমা দেওয়া হয়েছে!', 'success');
+});
+</script>
+</body>
+</html>

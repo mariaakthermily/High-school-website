@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>লগইন | শহীদ স্মরণী উচ্চ বিদ্যালয়</title>
+  <link rel="stylesheet" href="../css/style.css" />
+  <link rel="stylesheet" href="../css/animations.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@300;400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <style>
+    body { background: linear-gradient(135deg, #06163a 0%, #0a2463 50%, #093d25 100%); min-height: 100vh; display: flex; align-items: center; justify-content: center; }
+    .login-wrapper { width: 100%; padding: 20px; display: flex; align-items: center; justify-content: center; min-height: 100vh; }
+    .login-box { background: white; border-radius: 20px; width: 100%; max-width: 460px; overflow: hidden; box-shadow: 0 30px 80px rgba(0,0,0,0.4); animation: scaleIn 0.5s ease; }
+    .login-header { background: linear-gradient(135deg, var(--navy) 0%, var(--green-dark) 100%); padding: 36px 36px 28px; text-align: center; color: white; }
+    .login-logo { font-size: 3rem; margin-bottom: 12px; }
+    .login-header h2 { font-size: 1.3rem; font-weight: 700; margin-bottom: 4px; }
+    .login-header p { font-size: 0.83rem; opacity: 0.8; }
+    .login-body { padding: 32px 36px; }
+    .login-tabs { display: flex; gap: 0; margin-bottom: 24px; background: var(--light-gray); border-radius: 8px; padding: 4px; }
+    .login-tab { flex: 1; padding: 8px; text-align: center; border-radius: 6px; font-size: 0.875rem; font-weight: 600; cursor: pointer; transition: all 0.2s; color: var(--text-light); }
+    .login-tab.active { background: white; color: var(--navy); box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
+    .form-group { margin-bottom: 18px; position: relative; }
+    .input-with-icon { position: relative; }
+    .input-icon { position: absolute; left: 12px; top: 50%; transform: translateY(-50%); color: var(--gray); font-size: 0.9rem; }
+    .input-with-icon .form-control { padding-left: 38px; }
+    .password-toggle { position: absolute; right: 12px; top: 50%; transform: translateY(-50%); color: var(--gray); cursor: pointer; font-size: 0.9rem; }
+    .password-toggle:hover { color: var(--navy); }
+    .remember-row { display: flex; align-items: center; justify-content: space-between; margin-bottom: 20px; font-size: 0.85rem; }
+    .remember-row label { display: flex; align-items: center; gap: 6px; cursor: pointer; color: var(--text-mid); }
+    .forgot-link { color: var(--navy); font-weight: 600; }
+    .login-btn { width: 100%; padding: 13px; background: var(--navy); color: white; border: none; border-radius: 8px; font-size: 1rem; font-weight: 700; cursor: pointer; transition: all 0.3s; display: flex; align-items: center; justify-content: center; gap: 8px; font-family: var(--font-bn); }
+    .login-btn:hover { background: var(--navy-dark); transform: translateY(-2px); box-shadow: 0 6px 20px rgba(10,36,99,0.35); }
+    .login-btn:disabled { opacity: 0.7; cursor: not-allowed; transform: none; }
+    .error-msg { color: var(--red); font-size: 0.82rem; margin-top: 4px; display: block; min-height: 18px; }
+    .demo-creds { margin-top: 24px; background: rgba(10,36,99,0.06); border-radius: 8px; padding: 14px; }
+    .demo-creds h5 { font-size: 0.8rem; font-weight: 700; color: var(--navy); margin-bottom: 8px; }
+    .demo-cred-item { display: flex; gap: 8px; font-size: 0.78rem; color: var(--text-mid); margin-bottom: 4px; cursor: pointer; }
+    .demo-cred-item:hover { color: var(--navy); }
+    .demo-cred-item span { background: var(--mid-gray); padding: 2px 8px; border-radius: 4px; font-family: monospace; }
+    .login-footer { padding: 0 36px 24px; text-align: center; }
+    .login-footer a { color: var(--navy); font-size: 0.85rem; }
+    .back-home { position: fixed; top: 20px; left: 20px; background: rgba(255,255,255,0.15); color: white; padding: 8px 16px; border-radius: 20px; font-size: 0.85rem; display: flex; align-items: center; gap: 6px; backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.2); }
+    .back-home:hover { background: rgba(255,255,255,0.25); }
+  </style>
+</head>
+<body>
+
+<a href="../index.html" class="back-home"><i class="fas fa-arrow-left"></i> হোমে ফিরুন</a>
+
+<div class="login-wrapper">
+  <div class="login-box">
+    <div class="login-header">
+      <div class="login-logo">🏫</div>
+      <h2>শহীদ স্মরণী উচ্চ বিদ্যালয়</h2>
+      <p>পোর্টালে লগইন করুন</p>
+    </div>
+    <div class="login-body">
+      <div class="login-tabs">
+        <div class="login-tab active" onclick="switchTab('user')">ব্যবহারকারী</div>
+        <div class="login-tab" onclick="switchTab('student')">শিক্ষার্থী</div>
+        <div class="login-tab" onclick="switchTab('parent')">অভিভাবক</div>
+      </div>
+
+      <form id="loginForm" autocomplete="off">
+        <span id="loginError" class="error-msg"></span>
+        <div class="form-group">
+          <label class="form-label">ব্যবহারকারীর নাম / আইডি</label>
+          <div class="input-with-icon">
+            <i class="fas fa-user input-icon"></i>
+            <input type="text" name="username" id="username" class="form-control" placeholder="ব্যবহারকারীর নাম লিখুন" required />
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-label">পাসওয়ার্ড</label>
+          <div class="input-with-icon">
+            <i class="fas fa-lock input-icon"></i>
+            <input type="password" name="password" id="password" class="form-control" placeholder="পাসওয়ার্ড লিখুন" required />
+            <button type="button" class="password-toggle" id="togglePassword"><i class="fas fa-eye"></i></button>
+          </div>
+        </div>
+        <div class="remember-row">
+          <label><input type="checkbox" /> আমাকে মনে রাখুন</label>
+          <a href="#" class="forgot-link">পাসওয়ার্ড ভুলে গেছেন?</a>
+        </div>
+        <button type="submit" class="login-btn"><i class="fas fa-sign-in-alt"></i> লগইন করুন</button>
+      </form>
+
+      <div class="demo-creds">
+        <h5>🔑 ডেমো অ্যাকাউন্ট (পরীক্ষার জন্য):</h5>
+        <div class="demo-cred-item" onclick="fillCreds('admin','admin123')">
+          <span>admin</span> / <span>admin123</span> → <em>অ্যাডমিন</em>
+        </div>
+        <div class="demo-cred-item" onclick="fillCreds('principal','principal123')">
+          <span>principal</span> / <span>principal123</span> → <em>প্রধান শিক্ষক</em>
+        </div>
+        <div class="demo-cred-item" onclick="fillCreds('student01','student01')">
+          <span>student01</span> / <span>student01</span> → <em>শিক্ষার্থী</em>
+        </div>
+      </div>
+    </div>
+    <div class="login-footer">
+      <a href="../index.html">← মূল ওয়েবসাইটে ফিরুন</a>
+    </div>
+  </div>
+</div>
+
+<script src="../js/main.js"></script>
+<script>
+function switchTab(tab) {
+  document.querySelectorAll('.login-tab').forEach(t => t.classList.remove('active'));
+  event.target.classList.add('active');
+}
+function fillCreds(user, pass) {
+  document.getElementById('username').value = user;
+  document.getElementById('password').value = pass;
+  document.getElementById('loginError').textContent = '';
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>পরীক্ষার ফলাফল | শহীদ স্মরণী উচ্চ বিদ্যালয়</title>
+  <link rel="stylesheet" href="../css/style.css" />
+  <link rel="stylesheet" href="../css/animations.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <style>
+    .result-search-card { background: linear-gradient(135deg, var(--navy) 0%, var(--green-dark) 100%); border-radius: 20px; padding: 40px; color: white; margin-bottom: 40px; }
+    .result-search-card h2 { font-size: 1.8rem; font-weight: 800; margin-bottom: 8px; }
+    .result-search-card p { opacity: 0.85; margin-bottom: 28px; }
+    .result-form-grid { display: grid; grid-template-columns: 1fr 1fr 1fr auto; gap: 14px; align-items: flex-end; }
+    .result-form-group { display: flex; flex-direction: column; gap: 6px; }
+    .result-form-group label { font-size: 0.85rem; font-weight: 600; opacity: 0.9; }
+    .result-input { padding: 11px 14px; border-radius: 8px; border: 2px solid rgba(255,255,255,0.3); background: rgba(255,255,255,0.15); color: white; font-size: 0.9rem; font-family: var(--font-bn); transition: all 0.2s; }
+    .result-input::placeholder { color: rgba(255,255,255,0.6); }
+    .result-input:focus { outline: none; border-color: rgba(255,255,255,0.8); background: rgba(255,255,255,0.2); }
+    .result-input option { background: var(--navy); }
+    .result-year-tabs { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 30px; }
+    .year-tab { padding: 8px 20px; border-radius: 20px; border: 2px solid var(--mid-gray); font-size: 0.875rem; font-weight: 600; cursor: pointer; transition: all 0.2s; color: var(--text-mid); }
+    .year-tab.active { background: var(--navy); color: white; border-color: var(--navy); }
+  </style>
+</head>
+<body>
+<div class="top-bar"><div class="container"><div class="top-bar-left"><span><i class="fas fa-phone"></i> +880 1700-000000</span></div><div class="top-bar-right"><a href="login.html" class="top-link"><i class="fas fa-sign-in-alt"></i> লগইন</a></div></div></div>
+<header class="header" id="header"><div class="container"><div class="header-inner"><div class="logo-area"><div class="logo-icon">🏫</div><div class="logo-text"><h1 class="school-name-bn">শহীদ স্মরণী উচ্চ বিদ্যালয়</h1><p class="school-name-en">Shahid Smarani High School</p></div></div><div><a href="../index.html" class="btn btn-primary-outline btn-sm"><i class="fas fa-home"></i> হোম</a></div></div></div></header>
+
+<div class="page-header"><div class="container"><div class="page-header-content"><h1>পরীক্ষার ফলাফল</h1><div class="breadcrumb"><a href="../index.html">হোম</a><span>/</span><span>ফলাফল</span></div></div></div></div>
+
+<section class="section-padding">
+  <div class="container">
+    <!-- SEARCH CARD -->
+    <div class="result-search-card reveal">
+      <h2><i class="fas fa-search"></i> ফলাফল অনুসন্ধান</h2>
+      <p>পরীক্ষার ধরন, শ্রেণি ও রোল নম্বর দিয়ে আপনার ফলাফল খুঁজুন</p>
+      <form id="resultForm">
+        <div class="result-form-grid">
+          <div class="result-form-group">
+            <label>পরীক্ষার ধরন</label>
+            <select name="examType" class="result-input">
+              <option value="SSC">SSC পরীক্ষা</option>
+              <option value="Annual">বার্ষিক পরীক্ষা</option>
+              <option value="HalfYearly">অর্ধ-বার্ষিক পরীক্ষা</option>
+            </select>
+          </div>
+          <div class="result-form-group">
+            <label>পরীক্ষার বছর</label>
+            <select name="examYear" class="result-input">
+              <option value="2025">২০২৫</option>
+              <option value="2024">২০২৪</option>
+              <option value="2023">২০২৩</option>
+            </select>
+          </div>
+          <div class="result-form-group">
+            <label>শ্রেণি</label>
+            <select name="class" class="result-input">
+              <option value="১০ম">১০ম শ্রেণি</option>
+              <option value="৯ম">৯ম শ্রেণি</option>
+              <option value="৮ম">৮ম শ্রেণি</option>
+              <option value="৭ম">৭ম শ্রেণি</option>
+              <option value="৬ষ্ঠ">৬ষ্ঠ শ্রেণি</option>
+            </select>
+          </div>
+          <div class="result-form-group">
+            <label>রোল নম্বর</label>
+            <input type="number" name="rollNo" class="result-input" placeholder="রোল নম্বর" min="1" />
+          </div>
+        </div>
+        <button type="submit" class="btn btn-white" style="margin-top:20px;"><i class="fas fa-search"></i> ফলাফল দেখুন</button>
+      </form>
+    </div>
+
+    <div id="resultArea" style="margin-bottom:40px;"></div>
+
+    <!-- PUBLIC EXAM RESULTS TABLE -->
+    <h2 class="section-title" style="text-align:left;margin-bottom:24px;">SSC পরীক্ষার ফলাফল সারসংক্ষেপ</h2>
+    <div class="result-year-tabs">
+      <div class="year-tab active">SSC ২০২৫</div>
+      <div class="year-tab">SSC ২০২৪</div>
+      <div class="year-tab">SSC ২০২৩</div>
+      <div class="year-tab">SSC ২০২২</div>
+    </div>
+
+    <div class="results-grid reveal">
+      <div class="result-year-card">
+        <div class="result-year" style="color:var(--navy);">SSC ২০২৫</div>
+        <div class="result-stats">
+          <div class="result-stat"><span class="stat-num">১৮০</span><span class="stat-lbl">পরীক্ষার্থী</span></div>
+          <div class="result-stat"><span class="stat-num">১৮০</span><span class="stat-lbl">উত্তীর্ণ</span></div>
+          <div class="result-stat highlight"><span class="stat-num">৮৫</span><span class="stat-lbl">জিপিএ-৫</span></div>
+        </div>
+        <div class="result-percentage">পাসের হার: ১০০%</div>
+        <div class="result-bar"><div class="result-bar-fill" style="width:100%"></div></div>
+      </div>
+      <div class="result-year-card">
+        <div class="result-year">SSC ২০২৪</div>
+        <div class="result-stats">
+          <div class="result-stat"><span class="stat-num">১৭৫</span><span class="stat-lbl">পরীক্ষার্থী</span></div>
+          <div class="result-stat"><span class="stat-num">১৭৫</span><span class="stat-lbl">উত্তীর্ণ</span></div>
+          <div class="result-stat highlight"><span class="stat-num">৭৮</span><span class="stat-lbl">জিপিএ-৫</span></div>
+        </div>
+        <div class="result-percentage">পাসের হার: ১০০%</div>
+        <div class="result-bar"><div class="result-bar-fill" style="width:100%"></div></div>
+      </div>
+      <div class="result-year-card">
+        <div class="result-year">SSC ২০২৩</div>
+        <div class="result-stats">
+          <div class="result-stat"><span class="stat-num">১৬৮</span><span class="stat-lbl">পরীক্ষার্থী</span></div>
+          <div class="result-stat"><span class="stat-num">১৬৪</span><span class="stat-lbl">উত্তীর্ণ</span></div>
+          <div class="result-stat highlight"><span class="stat-num">৬৫</span><span class="stat-lbl">জিপিএ-৫</span></div>
+        </div>
+        <div class="result-percentage">পাসের হার: ৯৭.৬%</div>
+        <div class="result-bar"><div class="result-bar-fill" style="width:97.6%"></div></div>
+      </div>
+    </div>
+
+    <!-- HOW TO SEARCH INFO -->
+    <div class="card reveal" style="margin-top:40px;">
+      <div class="card-body">
+        <h3 style="color:var(--navy);margin-bottom:16px;"><i class="fas fa-info-circle"></i> ফলাফল দেখার নিয়ম</h3>
+        <ol style="padding-left:20px;display:flex;flex-direction:column;gap:10px;font-size:0.9rem;color:var(--text-mid);">
+          <li>প্রথমে পরীক্ষার ধরন নির্বাচন করুন (SSC / বার্ষিক / অর্ধ-বার্ষিক)</li>
+          <li>পরীক্ষার বছর নির্বাচন করুন</li>
+          <li>সঠিক শ্রেণি নির্বাচন করুন</li>
+          <li>রোল নম্বর লিখুন (পরীক্ষার প্রবেশপত্রে প্রদত্ত নম্বর)</li>
+          <li>"ফলাফল দেখুন" বাটনে ক্লিক করুন</li>
+        </ol>
+        <div class="alert alert-info" style="margin-top:16px;"><i class="fas fa-info-circle"></i> ফলাফল সংক্রান্ত যেকোনো সমস্যায় বিদ্যালয় কার্যালয়ে যোগাযোগ করুন।</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="footer"><div class="footer-bottom"><div class="container"><p>© ২০২৫ শহীদ স্মরণী উচ্চ বিদ্যালয়</p><div class="footer-bottom-links"><a href="../index.html">হোম</a><a href="contact.html">যোগাযোগ</a></div></div></div></footer>
+<button class="back-to-top" id="backToTop" onclick="scrollToTop()"><i class="fas fa-chevron-up"></i></button>
+<script src="../js/main.js"></script>
+<script>
+// Demo hint: Roll 1, 2025, ১০ম
+document.getElementById('resultForm').addEventListener('submit', function(e) {
+  e.preventDefault();
+  const roll = parseInt(this.rollNo.value);
+  const year = parseInt(this.examYear.value);
+  const cls = this.class.value;
+  const allResults = DB.get('results');
+  const examResult = allResults.find(r => r.year == year && r.class === cls);
+  const resultArea = document.getElementById('resultArea');
+  if (!examResult) { resultArea.innerHTML = '<div class="alert alert-warning" style="margin-bottom:20px;"><i class="fas fa-exclamation-triangle"></i> এই পরীক্ষার ফলাফল এখনও প্রকাশিত হয়নি বা পাওয়া যায়নি।</div>'; return; }
+  const student = examResult.entries.find(s => s.roll === roll);
+  if (!student) { resultArea.innerHTML = '<div class="alert alert-danger" style="margin-bottom:20px;"><i class="fas fa-times-circle"></i> এই রোল নম্বরে কোনো ফলাফল পাওয়া যায়নি। <br/><small>ডেমো: SSC ২০২৫, ১০ম শ্রেণি, রোল ১ বা ২ দিয়ে চেষ্টা করুন।</small></div>'; return; }
+  resultArea.innerHTML = buildResultCard(student, examResult);
+  resultArea.scrollIntoView({ behavior: 'smooth', block: 'start' });
+});
+</script>
+</body>
+</html>

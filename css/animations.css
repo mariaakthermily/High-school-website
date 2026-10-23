@@ -1,0 +1,275 @@
+/* ===========================
+   ANIMATIONS STYLESHEET
+   =========================== */
+
+/* ---- Keyframes ---- */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(40px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes slideDown {
+  from { opacity: 0; transform: translateY(-20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes slideLeft {
+  from { opacity: 0; transform: translateX(40px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+@keyframes slideRight {
+  from { opacity: 0; transform: translateX(-40px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+@keyframes scaleIn {
+  from { opacity: 0; transform: scale(0.9); }
+  to { opacity: 1; transform: scale(1); }
+}
+@keyframes pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.04); }
+}
+@keyframes shimmer {
+  0% { background-position: -200% center; }
+  100% { background-position: 200% center; }
+}
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); animation-timing-function: cubic-bezier(0.8, 0, 1, 1); }
+  50% { transform: translateY(-10px); animation-timing-function: cubic-bezier(0, 0, 0.2, 1); }
+}
+@keyframes ripple {
+  0% { transform: scale(0); opacity: 1; }
+  100% { transform: scale(4); opacity: 0; }
+}
+@keyframes countUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes gradientShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+@keyframes tickerMove {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+@keyframes rotateIn {
+  from { opacity: 0; transform: rotate(-5deg) scale(0.95); }
+  to { opacity: 1; transform: rotate(0) scale(1); }
+}
+
+/* ---- Animation Classes ---- */
+.animate-fade-in { animation: fadeIn 0.8s ease forwards; }
+.animate-slide-up { animation: slideUp 0.8s ease forwards; }
+.animate-slide-down { animation: slideDown 0.6s ease forwards; }
+.animate-slide-left { animation: slideLeft 0.8s ease forwards; }
+.animate-slide-right { animation: slideRight 0.8s ease forwards; }
+.animate-scale-in { animation: scaleIn 0.5s ease forwards; }
+.animate-float { animation: float 3s ease-in-out infinite; }
+.animate-pulse { animation: pulse 2s ease-in-out infinite; }
+.animate-bounce { animation: bounce 1.5s infinite; }
+
+/* ---- Delays ---- */
+.delay-1 { animation-delay: 0.2s; }
+.delay-2 { animation-delay: 0.4s; }
+.delay-3 { animation-delay: 0.6s; }
+.delay-4 { animation-delay: 0.8s; }
+.delay-5 { animation-delay: 1s; }
+
+/* ---- Scroll-triggered animations (via JS class toggle) ---- */
+.reveal {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+.reveal-left {
+  opacity: 0;
+  transform: translateX(-30px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+.reveal-left.visible {
+  opacity: 1;
+  transform: translateX(0);
+}
+.reveal-right {
+  opacity: 0;
+  transform: translateX(30px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+.reveal-right.visible {
+  opacity: 1;
+  transform: translateX(0);
+}
+.reveal-scale {
+  opacity: 0;
+  transform: scale(0.9);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+.reveal-scale.visible {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* Staggered reveals for grid items */
+.stagger-1 { transition-delay: 0.1s; }
+.stagger-2 { transition-delay: 0.2s; }
+.stagger-3 { transition-delay: 0.3s; }
+.stagger-4 { transition-delay: 0.4s; }
+.stagger-5 { transition-delay: 0.5s; }
+.stagger-6 { transition-delay: 0.6s; }
+
+/* ---- Notice Ticker ---- */
+.notice-ticker-wrapper {
+  background: var(--navy);
+  color: white;
+  padding: 10px 0;
+  overflow: hidden;
+  position: relative;
+}
+.notice-ticker-wrapper::before,
+.notice-ticker-wrapper::after {
+  content: '';
+  position: absolute;
+  top: 0; bottom: 0;
+  width: 80px;
+  z-index: 1;
+}
+.notice-ticker-wrapper::before { left: 0; background: linear-gradient(to right, var(--navy), transparent); }
+.notice-ticker-wrapper::after { right: 0; background: linear-gradient(to left, var(--navy), transparent); }
+.ticker-label {
+  position: absolute; left: 20px; top: 50%;
+  transform: translateY(-50%);
+  background: var(--gold);
+  color: var(--navy-dark);
+  padding: 3px 12px;
+  font-size: 0.75rem; font-weight: 800;
+  border-radius: 3px;
+  z-index: 2;
+  white-space: nowrap;
+}
+.ticker-content {
+  display: flex;
+  padding-left: 120px;
+  animation: tickerMove 40s linear infinite;
+  white-space: nowrap;
+  width: max-content;
+}
+.ticker-item {
+  font-size: 0.82rem;
+  padding: 0 40px 0 0;
+  opacity: 0.9;
+}
+.ticker-item::before {
+  content: '•';
+  margin-right: 10px;
+  color: var(--gold);
+}
+.ticker-content:hover { animation-play-state: paused; }
+
+/* ---- Loading Skeleton ---- */
+.skeleton {
+  background: linear-gradient(90deg, var(--mid-gray) 25%, var(--light-gray) 50%, var(--mid-gray) 75%);
+  background-size: 200% auto;
+  animation: shimmer 1.5s linear infinite;
+  border-radius: var(--radius-sm);
+}
+.skeleton-text { height: 16px; margin-bottom: 8px; }
+.skeleton-title { height: 24px; margin-bottom: 12px; width: 60%; }
+.skeleton-image { height: 200px; border-radius: var(--radius-md); }
+.skeleton-avatar { width: 80px; height: 80px; border-radius: 50%; }
+.skeleton-btn { height: 40px; width: 120px; border-radius: var(--radius-sm); }
+
+/* ---- Hover Effects ---- */
+.hover-lift { transition: transform 0.3s ease, box-shadow 0.3s ease; }
+.hover-lift:hover { transform: translateY(-6px); box-shadow: 0 16px 40px rgba(0,0,0,0.15); }
+.hover-glow:hover { box-shadow: 0 0 20px rgba(10,36,99,0.3); }
+.hover-brighten { transition: filter 0.3s ease; }
+.hover-brighten:hover { filter: brightness(1.05); }
+.hover-underline { position: relative; }
+.hover-underline::after {
+  content: '';
+  position: absolute; bottom: -2px; left: 0;
+  width: 0; height: 2px;
+  background: var(--navy);
+  transition: width 0.3s ease;
+}
+.hover-underline:hover::after { width: 100%; }
+
+/* ---- Button Ripple Effect ---- */
+.btn-ripple {
+  position: relative;
+  overflow: hidden;
+}
+.btn-ripple::after {
+  content: '';
+  position: absolute;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.3);
+  width: 100px; height: 100px;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%) scale(0);
+  transition: transform 0.5s, opacity 0.5s;
+  opacity: 0;
+}
+.btn-ripple:active::after {
+  animation: ripple 0.5s ease-out;
+}
+
+/* ---- Page Transitions ---- */
+.page-transition {
+  animation: fadeIn 0.4s ease;
+}
+
+/* ---- Loading Spinner ---- */
+.spinner {
+  width: 32px; height: 32px;
+  border: 3px solid var(--mid-gray);
+  border-top-color: var(--navy);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+.spinner-sm { width: 18px; height: 18px; border-width: 2px; }
+.spinner-lg { width: 48px; height: 48px; border-width: 4px; }
+
+/* ---- Empty State ---- */
+.empty-state {
+  text-align: center;
+  padding: 60px 20px;
+  color: var(--text-light);
+}
+.empty-state-icon { font-size: 3.5rem; margin-bottom: 16px; opacity: 0.4; }
+.empty-state h3 { font-size: 1.1rem; font-weight: 600; margin-bottom: 8px; color: var(--dark-gray); }
+.empty-state p { font-size: 0.875rem; }
+
+/* ---- Success/Error State ---- */
+.success-state, .error-state {
+  text-align: center;
+  padding: 50px 30px;
+}
+.success-state .state-icon { font-size: 4rem; color: var(--green); margin-bottom: 16px; }
+.error-state .state-icon { font-size: 4rem; color: var(--red); margin-bottom: 16px; }
+.success-state h3 { color: var(--green); font-size: 1.3rem; font-weight: 700; margin-bottom: 10px; }
+.error-state h3 { color: var(--red); font-size: 1.3rem; font-weight: 700; margin-bottom: 10px; }
+
+/* ---- Print Styles ---- */
+@media print {
+  .header, .footer, .back-to-top, .top-bar,
+  .notice-ticker-wrapper, .hero, .quick-links,
+  .no-print { display: none !important; }
+  body { font-size: 12pt; color: black; }
+  .print-section { page-break-inside: avoid; }
+  .container { max-width: 100%; padding: 0; }
+  a { color: black; }
+  .card { box-shadow: none; border: 1px solid #ddd; }
+}
